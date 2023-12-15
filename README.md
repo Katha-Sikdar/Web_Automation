@@ -6,8 +6,8 @@
 ## About This Project - 
 + This project is done by using JAVA language. Here, multiple websites are being automated. These are
   - [demoqa.com](https://demoqa.com/)
-      + [daffodil](https://daffodilvarsity.edu.bd/)https://daffodilvarsity.edu.bd/
-      + https://www.google.com/
+  - [daffodil](https://daffodilvarsity.edu.bd/)https://daffodilvarsity.edu.bd/
+  - https://www.google.com/
 - Features of this project-
       - Automated a number of things such as-
               - Write few user informations in dialogue box for example - name, email address, present and permanent address and so on by using CSS selector.
