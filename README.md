@@ -4,8 +4,8 @@
  + Must have an website address whill will be automated.
  - JUNIT, SELENIUM
 ## About This Project - 
-- This project is done by using JAVA language. Here, multiple websites are being automated. These are -
-      - [demoqa.com](https://demoqa.com/)
++ This project is done by using JAVA language. Here, multiple websites are being automated. These are -
+      + [demoqa.com](https://demoqa.com/)
       - google.com
       - [daffodil](https://daffodilvarsity.edu.bd/)https://daffodilvarsity.edu.bd/
       - https://www.google.com/
