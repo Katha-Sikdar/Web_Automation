@@ -8,7 +8,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 
@@ -176,6 +178,77 @@ public class MyJUnitAutomation{
         driver.findElement(By.id("uploadFile")).sendKeys(System.getProperty("user.dir")+"./src/test/resources/15.PNG");
 
     //driver.findElement(By.id("uploadFile")).sendKeys(System.getProperty("user.dir")+"./src/test/resources/15.PNG");
+    }
+@Test
+    public void HandleTab() throws InterruptedException {
+
+        driver.get("https://demoqa.com/browser-windows");
+        driver.findElement(By.id("tabButton")).click();
+        Thread.sleep(3000);
+        ArrayList<String> w = new ArrayList(driver.getWindowHandles()); //switch to open tab
+        driver.switchTo().window(w.get(1));
+        System.out.println("New tab title: " + driver.getTitle());
+        String text = driver.findElement(By.id("sampleHeading")).getText();
+        Assertions.assertEquals(text,"This is a sample page");
+        driver.close();
+        driver.switchTo().window(w.get(0));
+    }
+
+    @Test
+    public void handleChildWindow(){
+
+        driver.get("https://demoqa.com/browser-windows");
+
+//Thread.sleep(5000);
+//WebDriverWait wait = new WebDriverWait(driver, 30);
+//wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("windowButton")));
+        driver.findElement(By.id(("windowButton"))).click();
+        String mainWindowHandle = driver.getWindowHandle();
+        Set<String> allWindowHandles = driver.getWindowHandles();
+        Iterator<String> iterator = allWindowHandles.iterator();
+
+        while (iterator.hasNext()) {
+            String ChildWindow = iterator.next();
+            if (!mainWindowHandle.equalsIgnoreCase(ChildWindow)) {
+                driver.switchTo().window(ChildWindow);
+                String text= driver.findElement(By.id("sampleHeading")).getText();
+                Assertions.assertTrue(text.contains("This is a sample page"));
+            }
+
+        }
+    }
+@Test
+    public void webTables(){
+        driver.get("https://demoqa.com/webtables");
+        driver.findElement(By.xpath("//span[@id='edit-record-1']//*[@stroke='currentColor']")).click();
+        driver.findElement(By.id("submit")).click();
+
+    }
+@Test
+    public void scrapData(){
+        driver.get("https://demoqa.com/webtables");
+        WebElement table = driver.findElement(By.className("rt-tbody"));
+        List<WebElement> allRows = table.findElements(By.className("rt-tr"));
+        int i=0;
+        for (WebElement row : allRows) {
+            List<WebElement> cells = row.findElements(By.className("rt-td"));
+            for (WebElement cell : cells) {
+                i++;
+                System.out.println("num["+i+"] "+ cell.getText());
+
+            }
+        }
+    }
+
+    @Test
+
+    public void handleIframe(){
+        driver.get("https://demoqa.com/frames");
+        driver.switchTo().frame("frame1");
+        String text= driver.findElement(By.id("sampleHeading")).getText();
+        Assertions.assertTrue(text.contains("This is a sample page"));
+        driver.switchTo().defaultContent();
+
     }
 
 
